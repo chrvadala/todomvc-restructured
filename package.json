@@ -1,6 +1,11 @@
 {
   "private": true,
+  "scripts": {
+    "start": "npm run serve",
+    "serve": "browser-sync start --server . --files js"
+  },
   "dependencies": {
+    "browser-sync": "^2.11.1",
     "classnames": "^2.1.5",
     "director": "^1.2.0",
     "react": "^0.13.3",
