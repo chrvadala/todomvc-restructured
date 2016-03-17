@@ -1,15 +1,24 @@
 {
   "private": true,
   "scripts": {
-    "start": "npm run serve",
-    "serve": "browser-sync start --server . --files js"
+    "start": "npm run watch & npm run serve",
+    "serve": "browser-sync start --server . --files src",
+    "watch": "watchify -v -t react-stylerify -t react-templatify --debug -o build/bundle.js src/main.js",
+    "build": "browserify -t react-stylerify -t react-templatify --debug -o build/bundle.js src/main.js",
+    "clean": "rm ./build/bundle.js"
   },
   "dependencies": {
     "browser-sync": "^2.11.1",
+    "browserify": "^13.0.0",
     "classnames": "^2.1.5",
-    "director": "^1.2.0",
+    "director": "^1.2.8",
     "react": "^0.13.3",
+    "react-dom": "^0.14.7",
+    "react-router": "^2.0.1",
+    "react-stylerify": "^1.1.0",
+    "react-templatify": "^0.3.2",
     "todomvc-app-css": "^2.0.0",
-    "todomvc-common": "^1.0.1"
+    "todomvc-common": "^1.0.1",
+    "watchify": "^3.7.0"
   }
 }

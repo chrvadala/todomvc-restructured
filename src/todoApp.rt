@@ -1,0 +1,34 @@
+<rt-require dependency="./footer" as="TodoFooter"/>
+<rt-require dependency="./todoItem" as="TodoItem"/>
+
+<div>
+  <header className="header">
+    <h1>todos</h1>
+    <input className="new-todo" placeholder="What needs to be done?" value="{this.state.newTodo}"
+           onKeyDown="{this.handleNewTodoKeyDown}" onChange="{this.handleChange}" autoFocus="{true}"/>
+  </header>
+
+  <section className="main" rt-if="this.props.model.todos.length">
+    <input className="toggle-all" type="checkbox" onChange="{this.toggleAll}"
+           checked="{this.getActiveTodoCount() === 0}"/>
+    <ul className="todo-list">
+      <TodoItem rt-repeat="todo in  this.getTodos()"
+                key="{todo.id}"
+                todo="{todo}"
+                onToggle="{this.toggle.bind(this, todo)}"
+                onDestroy="{this.destroy.bind(this, todo)}"
+                onEdit="{this.edit.bind(this, todo)}"
+                editing="{this.state.editing === todo.id}"
+                onSave="{this.save.bind(this, todo)}"
+                onCancel="{this.cancel}"/>
+    </ul>
+  </section>
+
+
+  <TodoFooter rt-if="this.getActiveTodoCount() || this.props.model.todos.length - this.getActiveTodoCount()"
+              count="{this.getActiveTodoCount()}"
+              completedCount="{this.props.model.todos.length - this.getActiveTodoCount()}"
+              nowShowing="{this.state.nowShowing}"
+              onClearCompleted="{this.clearCompleted}"/>
+</div>
+
